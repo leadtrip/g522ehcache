@@ -43,6 +43,23 @@
                     complete: function() { showSpinner( false ) }
                 });
             })
+
+            $( ".clearCache" ).click( function( event ) {
+                $.ajax( {
+                    url: "${g.createLink( controller:'cacheAccess', action:'clearCache')}",
+                    type: "post",
+                    timeout: 10000,
+                    success: function(data) {
+                        $( "#resultDiv" ).addClass( 'alert alert-info' ).text( 'Cache cleared' )
+                        $( '#cacheContentsDiv').html(data)
+                    },
+                    error: function(xhr, status, errorThrown) {
+                        $( "#resultDiv" ).addClass( 'alert alert-danger' ).append( 'Unable to clear cache ' + xhr.responseText )
+                    },
+                    beforeSend: function() { showSpinner( true ) },
+                    complete: function() { showSpinner( false ) }
+                });
+            })
         });
     </script>
 </head>
@@ -52,10 +69,12 @@
 
     <br>
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-success addToCache" name="addToCache">Add to cache</button>
-        <button type="button" class="btn btn-info getLastAddedFromCache" name="getLastAddedFromCache">Get last added to cache</button>
-        <button type="button" class="btn btn-danger clearCache" name="clearCache">Clear cache</button>
+    <div class="text-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-success addToCache" name="addToCache">Add to cache</button>
+            <button type="button" class="btn btn-info getLastAddedFromCache" name="getLastAddedFromCache">Get last added to cache</button>
+            <button type="button" class="btn btn-danger clearCache" name="clearCache">Clear cache</button>
+        </div>
     </div>
 
     <br>

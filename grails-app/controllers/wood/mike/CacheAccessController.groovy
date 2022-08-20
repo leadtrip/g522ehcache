@@ -1,7 +1,5 @@
 package wood.mike
 
-import grails.web.Action
-
 class CacheAccessController {
 
     def cacheAccessService
@@ -16,5 +14,10 @@ class CacheAccessController {
 
     def getLastAddedFromCache() {
         render cacheAccessService.getLastAddedFromCache()
+    }
+
+    def clearCache() {
+        cacheAccessService.clearCache()
+        render template: 'cacheContents', model: [cacheContents: []]
     }
 }
