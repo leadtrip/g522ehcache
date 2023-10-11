@@ -30,6 +30,6 @@ class WordService {
     }
 
     def getWordFromService() {
-        new JsonSlurper().parse("https://random-words-api.vercel.app/word".toURL()).word[0]
+        new JsonSlurper().parse("https://random-word-api.herokuapp.com/word".toURL())[0]
     }
 }
